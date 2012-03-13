@@ -4,6 +4,8 @@
  */
 package com.github.ryancwilliams.mcmodmanager.library;
 
+import com.github.ryancwilliams.mcmodmanager.library.tree.DataTree;
+
 /**
  *
  * @author ryanwilliams

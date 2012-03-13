@@ -13,15 +13,22 @@ import java.nio.file.Path;
 class Mod {
     String name;
     String version;
-    Path path;
+    Path insidePath;
+    Path outsidePath;
     Jar[] jars = new Jar[Library.arraySize];
     int jarsH = 0;
     Mod[] dependencies = new Mod[Library.arraySize];
     int dependenciesH = 0;
-    Mod(String name, String version, Path path){     
+    Mod(String name, String version, Path insidepath){     
         this.name = name;
         this.version = version;
-        this.path = path;
+        this.insidePath = insidepath;
+    }
+    Mod(String name, String version, Path insidePath, Path outsidePath){     
+        this.name = name;
+        this.version = version;
+        this.insidePath = insidePath;
+        this.outsidePath = outsidePath;
     }
     public void addJar(Jar jar){
         this.jars[this.jarsH] = jar;
@@ -38,7 +45,10 @@ class Mod {
         return this.version;
     }
     Path getPath(){
-        return this.path;
+        return this.insidePath;
+    }
+    Path getOutsidePath(){
+        return this.outsidePath;
     }
     Jar[] getJars(){
         return this.jars;
