@@ -16,13 +16,27 @@ public class DataTree {
     private String[] names = new String[(Library.arraySize*4)];
     private int[] ids = new int[(Library.arraySize*4)];
     private int nodesH = 0;
-    
+    /**
+     * Creates a DataTree that is used to generate a DefaultMutableTreeNode
+     * @param rootName The name of the root node
+     */
     public DataTree(String rootName){
         this.addToNodes(-1, rootName, -1);
     }
+    /**
+     * Adds a node to the tree
+     * @param parent The index of the parent node
+     * @param name The name of this node
+     * @param id  The ID of this node
+     */
     public void addToTree(int parent, String name, int id){
         this.addToNodes(parent, name, id);
     }
+    /**
+     * Adds a folder node to the tree
+     * @param parrent The index of the parent node
+     * @param name  The name of this node
+     */
     public void addFolderToTree(int parrent, String name){
         this.addToNodes(parrent, name, -1);
     }
@@ -32,6 +46,10 @@ public class DataTree {
         this.ids[this.nodesH] = id;
         nodesH++;
     }
+    /**
+     * Generates and returns a DefaultMutableTreeNode of this tree
+     * @return The root node of the tree
+     */
     public DefaultMutableTreeNode getTree(){
         //The Code to generate the tree
         //Vars for tree node generation 
