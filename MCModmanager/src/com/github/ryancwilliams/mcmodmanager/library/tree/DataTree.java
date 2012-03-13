@@ -23,6 +23,9 @@ public class DataTree {
     public void addToTree(int parent, String name, int id){
         this.addToNodes(parent, name, id);
     }
+    public void addFolderToTree(int parrent, String name){
+        this.addToNodes(parrent, name, -1);
+    }
     private void addToNodes(int parent, String name, int id){
         this.nodes[this.nodesH] = parent;
         this.names[this.nodesH] = name;
@@ -34,5 +37,32 @@ public class DataTree {
         //Vars for tree node generation 
         DefaultMutableTreeNode[] tNode = new DefaultMutableTreeNode[nodesH];
         
+        //Create the nodes
+        //Create the root node
+        tNode[0] = new DefaultMutableTreeNode(this.names[0]);
+        //Create the other nodes
+        for(int c = 1;c <= this.nodesH;c++){
+            //Create the Vars for the for loop
+            DefaultMutableTreeNode cNode;
+            //Check if node is a folder
+            if (this.ids[c] != -1){
+            cNode = new DefaultMutableTreeNode(new DataNode
+                    (this.names[c],this.ids[c]));
+            } else {
+            cNode = new DefaultMutableTreeNode(this.names); 
+            }
+            //Place the resulte in the array
+            tNode[c] = cNode;
+        }
+        
+        //Link the nodes
+        for(int c = 1;c <= this.nodesH;c++){
+            //Get the indux of the parent node
+            int pNode = this.nodes[c];
+            //Set the parent node of the current node
+            tNode[pNode].add(tNode[c]);
+        }
+        //return the root node
+        return tNode[0];
     }
 }
