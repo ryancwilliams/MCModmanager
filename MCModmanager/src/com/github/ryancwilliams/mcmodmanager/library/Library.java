@@ -13,8 +13,8 @@ import com.github.ryancwilliams.mcmodmanager.library.tree.DataTree;
 public class Library {
     public static int arraySize = 128;
     
-    private Jar[] jars;
-    private Pack[] mods;
+    private Jar[] jars = new Jar[(this.arraySize*4)];
+    private Pack[] mods = new Pack[(this.arraySize*4)];
     private DataTree tree;
     public Library(){
         
