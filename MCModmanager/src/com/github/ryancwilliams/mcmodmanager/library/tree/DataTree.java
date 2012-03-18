@@ -40,6 +40,15 @@ public class DataTree {
     public void addFolderToTree(int parrent, String name){
         this.addToNodes(parrent, name, -1);
     }
+    /**
+     * Adds a folder node to the tree
+     * @param parrent The name of the parent node
+     * @param name  The name of this node
+     */
+    public void addFolderToTree(String parrent, String name){
+        int index = getIndex(this.names,parrent);
+        this.addFolderToTree(index, name);
+    }
     private void addToNodes(int parent, String name, int id){
         this.nodes[this.nodesH] = parent;
         this.names[this.nodesH] = name;
@@ -67,7 +76,7 @@ public class DataTree {
             cNode = new DefaultMutableTreeNode(new DataNode
                     (this.names[c],this.ids[c]));
             } else {
-            cNode = new DefaultMutableTreeNode(this.names); 
+            cNode = new DefaultMutableTreeNode(this.names[c]); 
             }
             //Place the resulte in the array
             tNode[c] = cNode;
@@ -82,5 +91,59 @@ public class DataTree {
         }
         //return the root node
         return tNode[0];
+    }
+    /**
+     * Changes the parent node of a node
+     * @param id the id of the node to change
+     * @param folder the name of the new parent of the node
+     */
+    public void changeParent(int id,String folder){
+        int index = this.getIndex(this.ids, id);
+        int pindex = this.getIndex(this.names, folder);
+        this.changeParent(index,pindex);
+    }
+    /**
+     * Changes the parent node of a node using the internal index of that node 
+     * @param index the index of the node to change
+     * @param parentIndex the index of the new parent of the node
+     */
+    private void changeParent(int index,int parentIndex){
+        this.nodes[index] = parentIndex;
+    }
+    /**
+     * Searches a array for a specific integer value.
+     * @param data the array
+     * @param val the value
+     * @return the index of the first occurrence of that value
+     */
+    private int getIndex(int[] data ,int val){
+        int index = -1;
+        boolean done = false;
+        int length = data.length;
+        for(int i = 0;i <= length && !done;i++){
+            if(data[i] == val){
+                index = i;
+                done = true;
+            }
+        }
+        return index;
+    }
+    /**
+     * Searches a array for a specific String value.
+     * @param data the array
+     * @param val the value
+     * @return the index of the first occurrence of that value
+     */
+    private int getIndex(String[] data ,String val){
+        int index = -1;
+        boolean done = false;
+        int length = data.length;
+        for(int i = 0;i <= length && !done;i++){
+            if(data[i].equals(val)){
+                index = i;
+                done = true;
+            }
+        }
+        return index;
     }
 }
